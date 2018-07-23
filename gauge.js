@@ -18,6 +18,7 @@ nv.models.gauge = function() {
         , zoneLimit1 = 0.6
         , zoneLimit2 = 0.8
         , dispatch = d3.dispatch('chartClick', 'renderEnd')
+        , myZones = []
         ;
 
 
@@ -65,8 +66,14 @@ nv.models.gauge = function() {
             wrap.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
             // draw gauge bands
-            for (var i in zones) {
-                drawBand(zones[i].from, zones[i].to, color(i), min, max, radius, g_bands);
+            if(myZones.length > 0) {
+                for (var i in myZones) {
+                    drawBand(myZones[i].from, myZones[i].to, myZones[i].color, min, max, radius, g_bands);
+                }
+            } else {
+                for (var i in zones) {
+                    drawBand(zones[i].from, zones[i].to, color(i), min, max, radius, g_bands);
+                }
             }
 
             // draw needle
@@ -227,6 +234,7 @@ nv.models.gauge = function() {
         max:         {get: function(){return max;}, set: function(_){max=_;}},
         zoneLimit1: {get: function(){return zoneLimit1;}, set: function(_){zoneLimit1=_;}},
         zoneLimit2: {get: function(){return zoneLimit2;}, set: function(_){zoneLimit2=_;}},
+        myZones: {get: function(){return myZones;}, set: function(_){myZones=_;}},
 
         // options that require extra logic in the setter
         margin: {get: function(){return margin;}, set: function(_){
