@@ -13,6 +13,7 @@ nv.models.gauge = function() {
         , valueFormat = d3.format(',.2f')
         , title = false
         , showMinMaxLabels = false
+        , showValue = true
         , min = 0
         , max = 100
         , zoneLimit1 = 0.6
@@ -123,12 +124,14 @@ nv.models.gauge = function() {
             }
 
             // draw value
-            g_label.append("text")
-                .data(data)
-                .attr("dy", fontSize / 2)
-                .attr("text-anchor", "middle")
-                .text(valueFormat)
-                .style("font-size", fontSize*0.9 + "px");
+            if (showValue) {
+                g_label.append("text")
+                    .data(data)
+                    .attr("dy", fontSize / 2)
+                    .attr("text-anchor", "middle")
+                    .text(valueFormat)
+                    .style("font-size", fontSize * 0.9 + "px");
+            }
 
             if (showMinMaxLabels) {
                 g_minLabel.append("text")
@@ -228,6 +231,7 @@ nv.models.gauge = function() {
         height:     {get: function(){return height;}, set: function(_){height=_;}},
         title:      {get: function(){return title;}, set: function(_){title=_;}},
         showMinMaxLabels:    {get: function(){return showMinMaxLabels;}, set: function(_){showMinMaxLabels=_;}},
+        showValue:    {get: function(){return showValue;}, set: function(_){showValue=_;}},
         valueFormat:    {get: function(){return valueFormat;}, set: function(_){valueFormat=_;}},
         id:         {get: function(){return id;}, set: function(_){id=_;}},
         min:         {get: function(){return min;}, set: function(_){min=_;}},
