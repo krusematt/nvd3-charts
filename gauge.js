@@ -12,6 +12,8 @@ nv.models.gauge = function() {
         , color = nv.utils.getColor(['#88ac67', '#f78f20', '#db4e4e'])
         , valueFormat = d3.format(',.2f')
         , title = false
+        , innerRadius = 0.65
+        , outerRadius = 0.85
         , showMinMaxLabels = false
         , showValue = true
         , min = 0
@@ -167,8 +169,8 @@ nv.models.gauge = function() {
                     .attr("d", d3.svg.arc()
                         .startAngle(valueToRadians(start, min, max))
                         .endAngle(valueToRadians(end, min, max))
-                        .innerRadius(0.65 * radius)
-                        .outerRadius(0.85 * radius))
+                        .innerRadius(innerRadius * radius)
+                        .outerRadius(outerRadius * radius))
                     .attr("transform", function() { return "translate(" + radius + ", " + radius + ") rotate(270)" });
             }
 
@@ -230,6 +232,8 @@ nv.models.gauge = function() {
         width:      {get: function(){return width;}, set: function(_){width=_;}},
         height:     {get: function(){return height;}, set: function(_){height=_;}},
         title:      {get: function(){return title;}, set: function(_){title=_;}},
+        innerRadius:     {get: function(){return innerRadius;}, set: function(_){innerRadius=_;}},
+        outerRadius:     {get: function(){return outerRadius;}, set: function(_){outerRadius=_;}},
         showMinMaxLabels:    {get: function(){return showMinMaxLabels;}, set: function(_){showMinMaxLabels=_;}},
         showValue:    {get: function(){return showValue;}, set: function(_){showValue=_;}},
         valueFormat:    {get: function(){return valueFormat;}, set: function(_){valueFormat=_;}},
